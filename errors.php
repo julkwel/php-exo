@@ -1,11 +1,2 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Document</title>
-</head>
-<body>
-    Hummm ... errors
-</body>
-</html>
+<li>Erros: <?= $_GET['errors'] ?></li>
+<a href="car_create.php">Formulaire</a>

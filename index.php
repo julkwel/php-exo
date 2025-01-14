@@ -1,32 +1,19 @@
-<?php
-// CRUD
-// Create
-// Objet
-// Procédurale, POO
-// MVC ->
-// << Class Model -> Encapsulation Object,
-// << View -> Twig, html, .php, JSON, XML, XHTML
-// << Controller -> Routing ( URL ) > REQUEST < req, res >
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $taskTitle = $_POST['task'];
-        $taskDelay = $_POST['delay'];
-        // persistence method, connexion + query + flush
-        header('Location: /tasks.php?title='.$taskTitle.'&delay='.$taskDelay);
-        exit(0);
-    }
-?>
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TODO LIST</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Automobile</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-    <form action="" method="post">
-        <input type="text" value="" name="task" placeholder="Task title">
-        <input type="text" value="" name="delay" placeholder="Task delay per day">
-        <input type="submit" name="submit" value="Save">
-    </form>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="./car_list.php">Liste des voitures</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./car_create.php">Créer une voiture</a>
+        </li>
+    </ul>
 </body>
 </html>
