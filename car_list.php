@@ -1,7 +1,14 @@
 <?php
     require_once 'database.php';
+	require 'Car.php';
     $data = find('SELECT * FROM car');
-    $data->setFetchMode(PDO::FETCH_OBJ);
+    $data->setFetchMode(PDO::FETCH_ASSOC);
+	$results = [];
+	foreach ($data as $row) {
+		$car = new Car();
+		$car->hydrate($row);
+		$results[] = $car;
+	}
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,13 +23,13 @@
         <a href="car_create.php">Créer une voiture</a>
         <table class="table">
             <tbody>
-                <?php foreach ($data as $row) { ?>
+                <?php foreach ($results as $row) { ?>
                     <tr>
-                        <td><?= $row->mark ?></td>
-                        <td><?= $row->type ?></td>
-                        <td><?= $row->year ?></td>
-                        <td><a href="car_edit.php?id=<?= $row->id ?>">Modifier</a></td>
-                        <td><a href="car_delete.php?id=<?= $row->id ?>">Supprimer</a></td>
+                        <td><?= $row->getMark() ?></td>
+                        <td><?= $row->getType() ?></td>
+                        <td><?= $row->getYear() ?></td>
+                        <td><a href="car_edit.php?id=<?= $row->getId() ?>">Modifier</a></td>
+                        <td><a href="car_delete.php?id=<?= $row->getId() ?>">Supprimer</a></td>
                     </tr>
                 <?php } ?>
             </tbody>

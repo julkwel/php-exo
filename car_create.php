@@ -1,8 +1,11 @@
 <?php
     require_once 'database.php';
+	require_once './Car.php';
     try {
         if (isset($_POST['submit'])) {
-            insert($_POST);
+			$car = new Car();
+			$car->hydrate($_POST);
+            insert($car);
             header('location: car_list.php');
             exit(0);
         }

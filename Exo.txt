@@ -1,0 +1,12 @@
+Product ( nom, cover, price, qty, description )
+
+Côté administrateur
+> Afficher les produits dans un tableau nom + description + cover + qty + price
+> L'administrateur peut supprimer, modifier, créer un produit
+
+Côté utilisateur
+> Afficher les produits, voir details
+
+Challenge :
+Securisation page administrateur
+Système d'authentification (login & inscription & gestion role ) + docs ( session, session_start, session_end, session_destroy )

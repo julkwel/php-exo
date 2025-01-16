@@ -15,34 +15,34 @@ function find(string $sql): PDOStatement|false
     return $pdo->query($sql);
 }
 
-function update(array $data)
+function update(Car $car): bool
 {
     $pdo = connectToDatabase();
-
     $query = $pdo->prepare("UPDATE `car` SET `type` = :type, `mark` = :mark, `year` = :year WHERE `id` = :id");
-    $query->execute([
-        'type' => $data['type'],
-        'mark' => $data['mark'],
-        'year' => $data['year'],
-        'id' => $data['id'],
+
+    return $query->execute([
+        'type' => $car->getType(),
+        'mark' => $car->getMark(),
+        'year' => $car->getYear(),
+        'id' => $car->getId(),
     ]);
 }
 
-function insert(array $data): void
+function insert(Car $car): void
 {
     $pdo = connectToDatabase();
 
     $query = $pdo->prepare('INSERT INTO `car` (`type`, `mark`, `year`) VALUES (:type, :mark, :year)');
     $query->execute([
-        'type' => $data['type'],
-        'mark' => $data['mark'],
-        'year' => $data['year'],
+        'type' => $car->getType(),
+        'mark' => $car->getMark(),
+        'year' => $car->getYear(),
     ]);
 }
 
-function delete(int $id)
+function delete(Car $car): void
 {
     $pdo = connectToDatabase();
     $query = $pdo->prepare('DELETE FROM `car` WHERE `id` = :id');
-    $query->execute(['id' => $id]);
+    $query->execute(['id' => $car->getId()]);
 }

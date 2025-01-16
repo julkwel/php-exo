@@ -1,16 +1,20 @@
 <?php
 require_once 'database.php';
+require 'Car.php';
 try {
+    $car = new Car();
     if (isset($_POST['submit'])) {
         $_POST['id'] = $_GET['id'];
-        update($_POST);
+		$car->hydrate($_POST);
+        update($car);
         header('location: car_list.php');
         exit(0);
     }
 
     if (isset($_GET['id'])) {
-        $car = find('SELECT * FROM car WHERE id = ' . $_GET['id']);
-        $car = $car->fetch(PDO::FETCH_OBJ);
+        $query = find('SELECT * FROM car WHERE id = ' . $_GET['id']);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+		$car->hydrate($result);
     } else {
         throw new Exception("ID not found");
     }
@@ -37,15 +41,15 @@ try {
             <form action="" method="post">
                 <div class="form-control">
                     <label for="mark">Marque voiture</label>
-                    <input type="text" value="<?= $car->mark ?>" id="mark" class="form-control" name="mark">
+                    <input type="text" value="<?= $car->getMark() ?>" id="mark" class="form-control" name="mark">
                 </div>
                 <div class="form-control">
                     <label for="type">Type</label>
-                    <input type="text" value="<?= $car->type ?>" id="type" class="form-control" name="type">
+                    <input type="text" value="<?= $car->getType() ?>" id="type" class="form-control" name="type">
                 </div>
                 <div class="form-control">
                     <label for="year">Année</label>
-                    <input type="text" value="<?= $car->year ?>" id="year" class="form-control" name="year">
+                    <input type="text" value="<?= $car->getYear() ?>" id="year" class="form-control" name="year">
                 </div>
                 <div class="form-control">
                     <input type="submit" name="submit" class="w-100 btn btn-primary" value="Enregistrer">
